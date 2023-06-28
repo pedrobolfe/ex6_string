@@ -5,32 +5,28 @@ const resp1 = document.querySelector("pre");
 frm.addEventListener("submit", (e) => {
     //evita o envio do formulario
     e.preventDefault();
-    let entrada = String(frm.inTexto.value);
+    const frase = String(frm.inFrase.value);
+    const palavra = String(frm.inPalavra.value);
+    const indexes = String(frm.inIndex.value);
 
-    entrada = entrada.split(";");
-
-    let frase = entrada[0];
-    const palavra = entrada[1];
-    const pos = entrada[2];
-
-    escreve_str(frase, palavra, pos);
+    insertString(frase, palavra, indexes);
 });
 
-function escreve_str(frase, palavra, pos){
-    let aux = frase;
-    
-    posicoes = pos.split(',')
-    posicoes[0] = posicoes[0].replace['['];
-    posicoes[-1] = posicoes[-1].replace[']'];
+function insertString(frase, palavra, indexes){ //indexes [1,6,3]
+    let aux = frase.split(""); // separa a frase por caracteres 
 
-    // for (let i =0; i < posicoes.lenght; i++){
-        
-    // }
-    
-    // pos.slice(1); // remover o ultimo elemento "]"
-    //pos.shift(); // remover o primeiro elemento "["
-    
-    console.log(posicoes);
+    // tirar os '[', ']' e ',' dos indexes
+}
 
-    
+function escreve_str(frase, palavra, pos){ //pos [1,6,3]
+    let list_aux = frase.split("");
+    let cont = 0;
+
+    for (let i = 0; i <= frase.lenght; i++){
+        if (pos.inCludes(i)){
+            list_aux.splice(i + cont, 0, palavra);
+            cont++;
+        }
+    }
+    return list_aux.join(""); // junta todos elementos da lista
 }
