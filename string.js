@@ -9,24 +9,27 @@ frm.addEventListener("submit", (e) => {
     const palavra = String(frm.inPalavra.value);
     const indexes = String(frm.inIndex.value);
 
-    insertString(frase, palavra, indexes);
+    console.log(insertString(frase, palavra, indexes));
 });
 
-function insertString(frase, palavra, indexes){ //indexes [1,6,3]
-    let aux = frase.split(""); // separa a frase por caracteres 
-
-    // tirar os '[', ']' e ',' dos indexes
-}
-
-function escreve_str(frase, palavra, pos){ //pos [1,6,3]
-    let list_aux = frase.split("");
+function insertString(frase, palavra, pos){ //indexes [1,6,3]
+    const list_aux = frase.split(""); // separa a frase por caracteres 
     let cont = 0;
 
-    for (let i = 0; i <= frase.lenght; i++){
-        if (pos.inCludes(i)){
+    // tirar os '[', ']' e ',' dos indexes
+    const tiraIndexes = pos.replace(/[\[\]]/g, '');
+    let indexes = tiraIndexes.split(','); // array de string, ex,['1', '4', '10']
+
+    // converter os index do array para inteiro
+    indexes = indexes.map(index => parseInt(index.trim())); // [1, 4, 10]
+
+    // colocar a palavra no lugar dos indexes na frase
+    for (let i = 0; i < frase.length; i++){  
+        if(indexes.includes(i)){
             list_aux.splice(i + cont, 0, palavra);
             cont++;
         }
     }
-    return list_aux.join(""); // junta todos elementos da lista
+
+    resp1.innerText = list_aux.join("");
 }
